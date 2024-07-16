@@ -1,0 +1,28 @@
+<div class="body">
+    <div class="loginCont">
+        <div class="signUpCont">
+            <h1>Sign Up</h1>
+            <div class="firstname">
+                <input type="text" placeholder="First Name" [(ngModel)]="firstnamee">
+            </div>
+            <div class="lastname">
+                <input type="text" placeholder="Last Name" [(ngModel)]="lastnamee">
+            </div>
+            <div class="email">
+                <input type="text" placeholder="Email" [(ngModel)]="emaill">
+            </div>
+            <div class="password">
+                <input type="password" placeholder="Password" [(ngModel)]="passwordd">
+            </div>
+            <div class="password">
+                <input type="password" placeholder="Re-Enter Password" [(ngModel)]="repasswordd">
+            </div>
+
+            <button class="button-13" (click)="onSignup()">Sign Up</button>
+        </div>
+        <div class="pictureCont">
+            <img class="flower" src="../../assets/flower2.png" alt="">
+            <a routerLink="/login">Already have an account?</a>
+        </div>
+    </div>
+</div>

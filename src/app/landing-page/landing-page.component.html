@@ -1,0 +1,18 @@
+<div class="html">
+    <button class="button-18" (click)="logout()"><mat-icon>exit_to_app</mat-icon></button>
+    <div class="title-wrapper">
+        <h1 class="header1">Image Gallery</h1>
+        <button (click)="uploadImageDialog()" class="button-17"> Upload Image </button>
+    </div>
+
+    <div class="border"></div>
+
+    <div class="container">
+        <div class="wrapper" *ngFor="let name of this.images" (dblclick)="openImage(name)">
+            <div class="card">
+                <img [src]="getImageUrl(name.image_path)" alt="Image 2">
+                <i class="fal"><mat-icon>arrow_forward</mat-icon></i>
+            </div>
+        </div>
+    </div>
+</div>

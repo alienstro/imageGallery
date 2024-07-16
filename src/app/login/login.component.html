@@ -1,0 +1,19 @@
+<div class="body">
+    <div class="loginCont">
+        <div class="pictureCont">
+            <img class="flower" src="../../assets/flower.png" alt="">
+            <a routerLink="/signup">Create an account?</a>
+        </div>
+        <div class="signUpCont">
+            <h1>Sign In</h1>
+            <div class="email">
+                <input type="text" placeholder="Email" [(ngModel)]="emaill">
+            </div>
+            <div class="password">
+                <input type="password" placeholder="Password" [(ngModel)]="passwordd">
+            </div>
+
+            <button class="button-13" (click)="onLogin()">Login</button>
+        </div>
+    </div>
+</div>
