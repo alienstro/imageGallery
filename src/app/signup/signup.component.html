@@ -3,19 +3,19 @@
         <div class="signUpCont">
             <h1>Sign Up</h1>
             <div class="firstname">
-                <input type="text" placeholder="First Name" [(ngModel)]="firstnamee">
+                <input type="text" placeholder="First Name" [(ngModel)]="signupForm.firstname">
             </div>
             <div class="lastname">
-                <input type="text" placeholder="Last Name" [(ngModel)]="lastnamee">
+                <input type="text" placeholder="Last Name" [(ngModel)]="signupForm.lastname">
             </div>
             <div class="email">
-                <input type="text" placeholder="Email" [(ngModel)]="emaill">
+                <input type="text" placeholder="Email" [(ngModel)]="signupForm.email">
             </div>
             <div class="password">
-                <input type="password" placeholder="Password" [(ngModel)]="passwordd">
+                <input type="password" placeholder="Password" [(ngModel)]="signupForm.password">
             </div>
             <div class="password">
-                <input type="password" placeholder="Re-Enter Password" [(ngModel)]="repasswordd">
+                <input type="password" placeholder="Re-Enter Password" [(ngModel)]="signupForm.repassword">
             </div>
 
             <button class="button-13" (click)="onSignup()">Sign Up</button>
@@ -26,3 +26,34 @@
         </div>
     </div>
 </div>
+
+<!-- <div class="body">
+    <div class="loginCont">
+        <form [formGroup]="signupForm" class="formgroup">
+            <div class="signUpCont">
+                <h1>Sign Up</h1>
+                <div class="firstname">
+                    <input type="text" formControlName="firstname" placeholder="First Name">
+                </div>
+                <div class="lastname">
+                    <input type="text" formControlName="lastname" placeholder="Last Name">
+                </div>
+                <div class="email">
+                    <input type="text" formControlName="email" placeholder="Email">
+                </div>
+                <div class="password">
+                    <input type="password" formControlName="password" placeholder="Password">
+                </div>
+                <div class="password">
+                    <input type="password" formControlName="repassword" placeholder="Re-Enter Password">
+                </div>
+
+                <button class="button-13" (click)="onSignup()">Sign Up</button>
+            </div>
+            <div class="pictureCont">
+                <img class="flower" src="../../assets/flower2.png" alt="">
+                <a routerLink="/login">Already have an account?</a>
+            </div>
+        </form>
+    </div>
+</div> -->

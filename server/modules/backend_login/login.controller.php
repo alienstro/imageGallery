@@ -1,19 +1,31 @@
 <?php
 
-class loginController {
-    public function isCorrectPassword($password, $hashedPassword) {
-        if($password != $hashedPassword) {
+class loginController
+{
+    public function isCorrectPassword($password, $hashedPassword)
+    {
+        if ($password != $hashedPassword) {
             return true;
         } else {
             return false;
         }
     }
 
-    public function isEmailExists($email) {
+    public function isEmailExists($email)
+    {
         if (!$email) {
-            return true; // Email exists
+            return true; 
         } else {
-            return false; // Email does not exist
+            return false; 
+        }
+    }
+
+    public function isNameValid($firstname, $lastname)
+    {
+        if (!empty($firstname) && !empty($lastname) && strlen($firstname) <= 30 && strlen($lastname) <= 30) {
+            return false; 
+        } else {
+            return true;
         }
     }
 }

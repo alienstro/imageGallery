@@ -81,6 +81,16 @@ class imageModel extends Connection
         $stmt->execute();
     }
 
+    public function deleteComment($comment_id)
+    {
+        $query = "DELETE FROM comments WHERE comment_id = :comment_id;";
+
+        $stmt = $this->connect()->prepare($query);
+        $stmt->bindParam(":comment_id", $comment_id);
+
+        $stmt->execute();
+    }
+
     public function deleteImage($image_id)
     {
         $query = "DELETE FROM images WHERE image_id = :image_id;";

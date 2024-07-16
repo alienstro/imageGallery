@@ -11,6 +11,8 @@ import { UserService } from '../services/user.service';
 import { ImageEditorComponent } from '@syncfusion/ej2-angular-image-editor';
 import { ImageEditorDialogComponent } from '../image-editor-dialog/image-editor-dialog.component';
 import { UpdateImageComponent } from '../update-image/update-image.component';
+import { DeleteCommentComponent } from '../delete-comment/delete-comment.component';
+import { DeleteImageComponent } from '../delete-image/delete-image.component';
 
 @Component({
   selector: 'app-open-image',
@@ -40,11 +42,11 @@ export class OpenImageComponent implements OnInit {
 
   imageEditor(image_path: string) {
     console.log(image_path)
-    this.dialog.open(ImageEditorDialogComponent,{width: '70rem', height: '50rem', data: { image_path }});
+    this.dialog.open(ImageEditorDialogComponent, { width: '70rem', height: '50rem', data: { image_path } });
   }
 
   updateImage(image_id: number) {
-    this.dialog.open(UpdateImageComponent,{width: '30rem', height: '43rem', data: { image_id }});
+    this.dialog.open(UpdateImageComponent, { width: '30rem', height: '43rem', data: { image_id } });
 
     console.log(image_id)
   }
@@ -70,25 +72,20 @@ export class OpenImageComponent implements OnInit {
     }
   }
 
-  
+
   deleteImage() {
-    this.dataService.deleteImage(this.imageId, "deleteImage").pipe(
-      tap((event: HttpResponse<any>) => {
-        if (event.type === HttpEventType.Response) {
-          if (event.body.status.remarks === 'success') {
+    const image_id = this.imageId;
 
-            this.imageStoreService.deleteImage(this.imageId);
-
-            this._snackBar.open('Successfully deleted an image', 'Close', {
-              duration: 5000,
-            });
-            this.dialogRef.close();
-          }
-        }
-      })
-    ).subscribe();
+    this.dialog.open(DeleteImageComponent, { width: '25rem', height: '8rem', data: { image_id } });
 
   }
+
+  deleteComment(comment_id: number) {
+    console.log(comment_id)
+
+    this.dialog.open(DeleteCommentComponent, { width: '25rem', height: '8rem', data: { comment_id } });
+  }
+
 
   onSubmit() {
     if (this.commentForm.valid) {
@@ -141,6 +138,9 @@ export class OpenImageComponent implements OnInit {
     // this.imageStoreService.comments$.subscribe(comments => {
     //   this.comments = comments;
     // });
+    this.imageStoreService.comments$.subscribe(comments => {
+      this.comments = comments;
+    });
 
     this.imageStoreService.getComment(this.imageId).subscribe(comments => {
       this.comments = comments;

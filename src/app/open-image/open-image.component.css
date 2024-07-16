@@ -262,3 +262,12 @@ padding: 24px 0 0 0;
     justify-content: center;
     padding: 24px 0;
 }
+
+.delete-comment {
+    font-size: 20px;
+    margin-top: 4px;
+}
+
+.delete-comment-btn {
+    cursor: pointer;
+}

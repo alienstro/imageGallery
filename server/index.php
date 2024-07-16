@@ -41,6 +41,10 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 echo json_encode($image->addComment($data));
                 break;
 
+            case 'deleteComment':
+                echo json_encode($image->deleteComment($data));
+                break;
+
             case 'deleteImage':
                 echo json_encode($image->deleteImage($data));
                 break;

@@ -65,6 +65,17 @@ export class DataService {
     });
   }
 
+  deleteComment(commentId: number, request: string): Observable<any> {
+
+    const url = `${API_URL}${request}`;
+    const data = {
+      commentId: commentId
+    }
+    return this.http.post(url, data, {
+      observe: 'events',
+    });
+  }
+
   login(email: string, password: string, request: string): Observable<any> {
     const url = `${API_URL}${request}`;
     const data = {
@@ -76,11 +87,12 @@ export class DataService {
     });
   }
 
-  signup(email: string, password: string, firstname: string, lastname: string, request: string): Observable<any> {
+  signup(email: string, password: string, repassword: string, firstname: string, lastname: string, request: string): Observable<any> {
     const url = `${API_URL}${request}`;
     const data = {
       email: email,
       password: password,
+      repassword: repassword,
       firstname: firstname,
       lastname: lastname,
     }

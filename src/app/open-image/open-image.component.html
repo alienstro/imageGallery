@@ -2,10 +2,10 @@
     <div class="imageCont">
         <img [src]="imagePath" alt="">
         <div class="column">
-            <div class="updateImage">
+            <div class="updateImage" *ngIf="this.ownersUserId == this.userId">
                 <button (click)="updateImage(this.imageId)" class="button-17">Update Image</button>
             </div>
-            <div class="imageEditor">
+            <div class="imageEditor" *ngIf="this.ownersUserId == this.userId">
                 <button (click)="imageEditor(this.imagePath)" class="button-17">Edit Image</button>
             </div>
             <div class="trash" *ngIf="this.ownersUserId == this.userId">
@@ -31,6 +31,7 @@
                                 <span class="date-text">
                                     {{name.comment_date | date:'medium'}}
                                 </span>
+                                <span (click)="deleteComment(name.comment_id)" class="delete-comment-btn" *ngIf="this.ownersUserId == this.userId"><mat-icon class="delete-comment">delete</mat-icon></span>
                             </div>
                             <!-- <h4>{{name.user_fname}} {{name.user_lname}} {{name.comment_date | date:'medium'}}</h4> -->
                             <p class="message">{{name.messages}}</p>

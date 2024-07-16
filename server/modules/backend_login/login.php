@@ -51,13 +51,24 @@ class login extends GlobalMethods
         try {
             $email = $data->email;
             $password = $data->password;
+            $repassword = $data->repassword;
             $firstname = $data->firstname;
             $lastname = $data->lastname;
 
             $loginModel = new \loginModel();
             $loginController = new \loginController();
 
-            if ($loginController->isEmailExists($email)) {
+            $fetchEmail = $loginModel->fetchEmail($email);
+
+            if($loginController->isNameValid($firstname, $lastname)) {
+                return $this->sendPayload(null, "fail", "Name should be less than 30 characters", 404);
+            }
+
+            if($loginController->isCorrectPassword($password, $repassword)) {
+                return $this->sendPayload(null, "fail", "Passwords do not match", 404);
+            }
+
+            if ($fetchEmail) {
                 return $this->sendPayload(null, "fail", "Email Already Taken", 404);
             }
 

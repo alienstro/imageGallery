@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../login/dialog/dialog.component';
 import { catchError, tap, throwError } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-signup',
@@ -13,50 +14,54 @@ import { catchError, tap, throwError } from 'rxjs';
   styleUrl: './signup.component.css'
 })
 export class SignupComponent {
-  emaill: string = '';
-  passwordd: string = '';
-  repasswordd: string = '';
-  firstnamee: string = '';
-  lastnamee: string = '';
+  signupForm: {
+    email: string;
+    password: string;
+    repassword: string;
+    firstname: string;
+    lastname: string;
+  } = {
+    email: '',
+    password: '',
+    repassword: '',
+    firstname: '',
+    lastname: ''
+  };
+
   error: string = '';
 
-  constructor(private dialog: MatDialog, private router: Router, private ngZone: NgZone, private dataService: DataService, private userService: UserService) {
-
-  }
-
-  openDialog(message: string) {
-    this.dialog.open(DialogComponent, {
-      data: { message: message },
-      width: '425px',
-      height: '300px'
-    });
-  }
+  constructor(private dialog: MatDialog, private router: Router, private ngZone: NgZone, private dataService: DataService, private userService: UserService, private _snackBar: MatSnackBar) {}
 
   onSignup() {
-    const email = this.emaill;
-    const password = this.passwordd;
-    const firstname = this.firstnamee;
-    const lastname = this.lastnamee;
-
-    this.dataService.signup(email, password, firstname, lastname, "signup").pipe(
+    this.dataService.signup(this.signupForm.email, this.signupForm.password, this.signupForm.repassword, this.signupForm.firstname, this.signupForm.lastname, "signup").pipe(
       tap((event: HttpResponse<any>) => {
         if (event.type === HttpEventType.Response) {
           const response = event as HttpResponse<any>;
-          if (response.body.status.remarks === 'success') {
+          if (response.body.status.remarks === 'uccess') {
             this.userService.setUserId(response.body.payload);
             this.ngZone.run(() => {
               this.router.navigate(['/landing-page']);
             });
           } else {
-            // this.openDialog("Email Already Taken. Please try again");
+            // do nothing, error will be caught by catchError
           }
         }
       }),
       catchError((error: HttpErrorResponse) => {
-        // Handle the error here
-        // For example, open a dialog or log the error
-        // this.openDialog("Email Already Taken. Please try again");
-        // Return an observable with a user-facing error message
+        if (error.error.status.message === 'Email Already Taken') {
+          this._snackBar.open('Email is already taken', 'Close', {
+            duration: 8000,
+          });
+
+        } else if (error.error.status.message === 'Passwords do not match'){
+          this._snackBar.open('Passwords do not match', 'Close', {
+            duration: 5000,
+          });
+        } else if (error.error.status.message === 'Name should be less than 30 characters'){
+          this._snackBar.open('Name should be less than 30 characters', 'Close', {
+            duration: 5000,
+          });
+        }
         return throwError(() => new Error('Something bad happened; please try again later.'));
       })
     ).subscribe();

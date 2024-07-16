@@ -50,12 +50,13 @@ export class UpdateImageComponent {
   }
 
   onFileChanged(event: any) {
-    this.myFiles = []; 
     const file = event.target.files[0];
-    this.myFiles.push(file); 
-    this.generateFilePreview(file);
+    if (!this.myFiles.includes(file) && file) {
+      this.myFiles = [];
+      this.myFiles.push(file);
+      this.generateFilePreview(file);
+    }
   }
-
   generateFilePreview(file: File) {
     const reader = new FileReader();
     reader.onload = (event: any) => {
@@ -89,7 +90,7 @@ export class UpdateImageComponent {
     console.log('Upload file:', this.myFiles[0]);
     console.log(this.userId);
     console.log(this.myFiles[0])
-  
+
     this.isLoading = true;
     from([this.myFiles[0]]).pipe(
       concatMap(file => {
@@ -122,7 +123,7 @@ export class UpdateImageComponent {
             return throwError(error);
           }),
           finalize(() => {
-            this.myFiles = []; 
+            this.myFiles = [];
             this.isLoading = false;
           })
         );

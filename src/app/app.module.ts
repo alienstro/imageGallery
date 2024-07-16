@@ -20,6 +20,8 @@ import { ImageEditorDialogComponent } from './image-editor-dialog/image-editor-d
 import { SignupComponent } from './signup/signup.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { UpdateImageComponent } from './update-image/update-image.component';
+import { DeleteCommentComponent } from './delete-comment/delete-comment.component';
+import { DeleteImageComponent } from './delete-image/delete-image.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { UpdateImageComponent } from './update-image/update-image.component';
     ImageEditorDialogComponent,
     SignupComponent,
     UpdateImageComponent,
+    DeleteCommentComponent,
+    DeleteImageComponent,
   ],
   imports: [
     BrowserModule,

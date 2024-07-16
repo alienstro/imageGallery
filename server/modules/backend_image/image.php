@@ -196,6 +196,24 @@ class image extends \GlobalMethods
         }
     }
 
+    public function deleteComment($data)
+    {
+        try {
+            $imageUploadModel = new \imageModel();
+
+            $commentId = $data->commentId;
+            
+            if ($imageUploadModel->deleteComment($commentId)) {
+                return $this->sendPayload(null, "fail", "Failed to delete comment", 404);
+            } else {
+                return $this->sendPayload($data, "success", "Successfully deleted a comment", 200);
+            }
+        } catch (\Exception $e) {
+            $errmsg = $e->getMessage();
+            return $this->sendPayload(null, "fail", $errmsg, 404);
+        }
+    }
+
     public function deleteImage($data)
     {
         try {
@@ -330,7 +348,6 @@ class image extends \GlobalMethods
             return $this->sendPayload(null, "fail", "Upload failed", 404);
         } else {
 
-            $imageId = $imageUploadModel->getLatestImageId($userId);
             $fetchResultImage = $imageUploadModel->fetchImage($imageId);
 
             $data = json_encode(array(

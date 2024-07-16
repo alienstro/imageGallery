@@ -107,17 +107,18 @@ export class ImageStoreService {
   }
 
   addComment(newComment: CommentObject, id: number) {
-    // const imageToComment = this._images.value.find(image => image.image_id === id);
-
-    // const currentImages = [...this._images.value];
-    // const index = currentImages.findIndex(image => image.image_id === id);
-    // currentImages[index] = {...imageToComment, }
 
     console.log('this._comments.value:', this._comments.value);
 
     const currentState = Array.isArray(this._comments.value) ? this._comments.value : [];
     const newState = [...currentState, newComment];
 
+    this.setCommentState(newState);
+  }
+
+  deleteComment(commentId: number) {
+    const currentState = this._comments.value;
+    const newState = currentState.filter(comment => comment.comment_id !== commentId);
     this.setCommentState(newState);
   }
 
