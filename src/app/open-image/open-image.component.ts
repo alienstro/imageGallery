@@ -10,6 +10,7 @@ import { DataService } from '../services/data.service';
 import { UserService } from '../services/user.service';
 import { ImageEditorComponent } from '@syncfusion/ej2-angular-image-editor';
 import { ImageEditorDialogComponent } from '../image-editor-dialog/image-editor-dialog.component';
+import { UpdateImageComponent } from '../update-image/update-image.component';
 
 @Component({
   selector: 'app-open-image',
@@ -40,6 +41,12 @@ export class OpenImageComponent implements OnInit {
   imageEditor(image_path: string) {
     console.log(image_path)
     this.dialog.open(ImageEditorDialogComponent,{width: '70rem', height: '50rem', data: { image_path }});
+  }
+
+  updateImage(image_id: number) {
+    this.dialog.open(UpdateImageComponent,{width: '30rem', height: '43rem', data: { image_id }});
+
+    console.log(image_id)
   }
 
   onFileSelected(event: any) {
@@ -82,7 +89,6 @@ export class OpenImageComponent implements OnInit {
     ).subscribe();
 
   }
-
 
   onSubmit() {
     if (this.commentForm.valid) {

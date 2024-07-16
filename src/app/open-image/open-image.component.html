@@ -2,6 +2,9 @@
     <div class="imageCont">
         <img [src]="imagePath" alt="">
         <div class="column">
+            <div class="updateImage">
+                <button (click)="updateImage(this.imageId)" class="button-17">Update Image</button>
+            </div>
             <div class="imageEditor">
                 <button (click)="imageEditor(this.imagePath)" class="button-17">Edit Image</button>
             </div>
@@ -16,30 +19,30 @@
             <h1><b>Comments</b></h1>
             <div class="border"></div>
             <div class="comment-list">
-            <ng-container *ngIf="comments.length > 0; else noComments">
-                <ng-container *ngFor="let name of comments">
-                    <div class="single-comment">
-                        <div class="top-row">
-                            <h4 class="name">
-                                {{name.user_fname}}
-                                {{name.user_lname}}
-                            </h4>
+                <ng-container *ngIf="comments.length > 0; else noComments">
+                    <ng-container *ngFor="let name of comments">
+                        <div class="single-comment">
+                            <div class="top-row">
+                                <h4 class="name">
+                                    {{name.user_fname}}
+                                    {{name.user_lname}}
+                                </h4>
 
-                            <span class="date-text">
-                                {{name.comment_date | date:'medium'}}
-                            </span>
+                                <span class="date-text">
+                                    {{name.comment_date | date:'medium'}}
+                                </span>
+                            </div>
+                            <!-- <h4>{{name.user_fname}} {{name.user_lname}} {{name.comment_date | date:'medium'}}</h4> -->
+                            <p class="message">{{name.messages}}</p>
                         </div>
-                        <!-- <h4>{{name.user_fname}} {{name.user_lname}} {{name.comment_date | date:'medium'}}</h4> -->
-                        <p class="message">{{name.messages}}</p>
-                    </div>
-            <div class="border-special"></div>
+                        <div class="border-special"></div>
+                    </ng-container>
                 </ng-container>
-            </ng-container>
-            <ng-template #noComments>
-                <p>
-                    Be the first one to comment!
-                </p>
-            </ng-template>
+                <ng-template #noComments>
+                    <p>
+                        Be the first one to comment!
+                    </p>
+                </ng-template>
             </div>
             <form [formGroup]="commentForm" (ngSubmit)="onSubmit()" class="form">
                 <input type="text" formControlName="comment" placeholder="Type your comment here!">

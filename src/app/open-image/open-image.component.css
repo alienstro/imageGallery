@@ -145,12 +145,13 @@
 .button-17:active {
     box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%), 0 8px 12px 6px rgb(60 64 67 / 15%);
     outline: none;
-}
-
-.button-17:focus {
-    outline: none;
     border: 2px solid #4285f4;
 }
+
+/* .button-17:focus {
+    outline: none;
+    border: 2px solid #4285f4;
+} */
 
 .button-17:not(:disabled) {
     box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;

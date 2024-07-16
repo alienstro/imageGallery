@@ -7,7 +7,7 @@ header("Access-Control-Allow-Headers: *");
 require_once "./autoloader.php";
 require_once "./config/dbconnection.php";
 
-$imageUpload = new backend_image\imageUpload();
+$image = new backend_image\image();
 $login = new backend_login\login();
 
 if (isset($_REQUEST['request'])) {
@@ -26,7 +26,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         $data = json_decode(file_get_contents("php://input"));
         switch ($request[0]) {
             case 'imageUpload':
-                echo json_encode($imageUpload->imageUpload($_FILES['userFile']));
+                echo json_encode($image->imageUpload($_FILES['userFile']));
                 break;
 
             case 'login':
@@ -38,29 +38,33 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 break;
 
             case 'addComment':
-                echo json_encode($imageUpload->addComment($data));
+                echo json_encode($image->addComment($data));
                 break;
 
             case 'deleteImage':
-                echo json_encode($imageUpload->deleteImage($data));
+                echo json_encode($image->deleteImage($data));
+                break;
+
+            case 'editImage':
+                echo json_encode($image->editImage($_FILES['userFile'], $data));
                 break;
         }
     case 'GET':
         switch ($request[0]) {
             case 'fetchImages':
-                echo json_encode($imageUpload->fetchImages());
+                echo json_encode($image->fetchImages());
                 break;
 
             case 'fetchImageById':
-                echo json_encode($imageUpload->fetchImageById($_GET['imageId']));
+                echo json_encode($image->fetchImageById($_GET['imageId']));
                 break;
 
             case 'fetchCommentById':
-                echo json_encode($imageUpload->fetchCommentById($_GET['imageId']));
+                echo json_encode($image->fetchCommentById($_GET['imageId']));
                 break;
 
             case 'fetchComments':
-                echo json_encode($imageUpload->fetchComments());
+                echo json_encode($image->fetchComments());
                 break;
         }
 }

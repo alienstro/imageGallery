@@ -18,6 +18,8 @@ import { DialogComponent } from './login/dialog/dialog.component';
 import { ImageEditorModule } from '@syncfusion/ej2-angular-image-editor';
 import { ImageEditorDialogComponent } from './image-editor-dialog/image-editor-dialog.component';
 import { SignupComponent } from './signup/signup.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { UpdateImageComponent } from './update-image/update-image.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { SignupComponent } from './signup/signup.component';
     DialogComponent,
     ImageEditorDialogComponent,
     SignupComponent,
+    UpdateImageComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,8 @@ import { SignupComponent } from './signup/signup.component';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
-    ImageEditorModule 
+    ImageEditorModule ,
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]

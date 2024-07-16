@@ -89,6 +89,23 @@ export class ImageStoreService {
     // this._images.next(newState);
   }
 
+  updateImage(newImage: ImageObject) {
+    const currentState = this._images.value;
+    const index = currentState.findIndex(image => image.image_id === newImage.image_id);
+
+    if (index !== -1) {
+      currentState[index] = {
+        ...currentState[index],
+        image_name: newImage.image_name,
+        image_size: newImage.image_size,
+        image_ext: newImage.image_ext,
+        image_path: newImage.image_path
+      };
+    }
+
+    this.setImageState(currentState);
+  }
+
   addComment(newComment: CommentObject, id: number) {
     // const imageToComment = this._images.value.find(image => image.image_id === id);
 
@@ -110,6 +127,6 @@ export class ImageStoreService {
     const newState = currentState.filter(image => image.image_id !== id);
 
     this.setImageState(newState);
-}
+  }
 
 }

@@ -79,6 +79,15 @@
   position: relative;
   display: inline-block;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.upload-note {
+  color: gray;
+  opacity: 0.5;
+  padding-top: 3px;
+  cursor: default;
 }
 
 .close-button {
@@ -99,10 +108,16 @@
 
 .btn {
   width: 300px;
+  margin-bottom: 1rem;
+}
+
+.btn-upload {
+  width: 300px;
 }
 
 .file-upload-container {
-  height: 95%;
+  height: 100%;
+  overflow-y: auto;
 }
 
 .container {
@@ -110,10 +125,10 @@
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
+  padding: 1rem 2rem 1rem 2rem;
   gap: 1.5rem;
-  max-height: 90%;
-  /* height: 100%; */
+  /* max-height: 90%; */
+  height: 93%;
 }
 
 .selected-files {
@@ -144,7 +159,7 @@
   display: flex;
   flex-flow: column nowrap;
   flex-grow: 1;
-  height: 22rem;
+  height: 10rem;
 }
 
 .list {
@@ -180,11 +195,11 @@ h6 {
   cursor: pointer;
   transition: all 150ms;
 
-  &:hover,
+  /* &:hover,
   &:focus {
     transform: rotateZ(90deg);
     background: hsl(216, 100, 40);
-  }
+  } */
 }
 
 /* CSS */
@@ -198,7 +213,7 @@ h6 {
   color: rgba(0, 0, 0, 0.85);
   cursor: pointer;
   display: inline-flex;
-  font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 12px;
   font-weight: 600;
   justify-content: center;
@@ -233,4 +248,32 @@ h6 {
   box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
   color: rgba(0, 0, 0, 0.65);
   transform: translateY(0);
+}
+
+.dropzone {
+  border: 2px dashed #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
+  /* cursor: pointer; */
+}
+
+.dropzone:hover {
+  background-color: #f8f8f8;
+}
+
+.dropzone-text {
+  padding: 1rem 0 4px 0;
+  text-align: center;
+  color: gray;
+  opacity: 0.5;
+}
+
+.image-preview {
+  width: 10rem;
+  height: 10rem;
+  border: 2px dashed #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
 }

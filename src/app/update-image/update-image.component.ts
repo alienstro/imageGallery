@@ -1,7 +1,7 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { ImageStoreService } from '../services/image-store.service';
 import { DataService } from '../services/data.service';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ImageObject } from '../interfaces/interfaces';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { catchError, concatMap, finalize, from, tap, throwError } from 'rxjs';
@@ -10,16 +10,19 @@ import { UserService } from '../services/user.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
-  selector: 'app-add-image',
-  templateUrl: './add-image.component.html',
-  styleUrl: './add-image.component.css'
+  selector: 'app-update-image',
+  templateUrl: './update-image.component.html',
+  styleUrl: './update-image.component.css'
 })
-export class AddImageComponent {
+export class UpdateImageComponent {
   trigger: any;
   userId!: number;
+  imageId!: number;
 
-  constructor(private userService: UserService, private imageStoreService: ImageStoreService, private dataService: DataService, public dialogRef: MatDialogRef<AddImageComponent>, public dialog: MatDialog, private _snackBar: MatSnackBar) {
+  constructor(private userService: UserService, private imageStoreService: ImageStoreService, private dataService: DataService, public dialogRef: MatDialogRef<UpdateImageComponent>, public dialog: MatDialog, private _snackBar: MatSnackBar, @Inject(MAT_DIALOG_DATA) public data: { image_id: any }) {
     this.userId = this.userService.getUserId()!;
+    this.imageId = this.data.image_id;
+
   }
 
   @ViewChild('fileInput') fileInput!: ElementRef;
@@ -47,14 +50,12 @@ export class AddImageComponent {
   }
 
   onFileChanged(event: any) {
-    const files = event.target.files;
-    this.myFiles = [...this.myFiles, ...files];
-    if (this.myFiles.length === 1) {
-      this.generateFilePreview(this.myFiles[0]);
-    }
-
-    console.log(this.myFiles.length);
+    this.myFiles = []; 
+    const file = event.target.files[0];
+    this.myFiles.push(file); 
+    this.generateFilePreview(file);
   }
+
   generateFilePreview(file: File) {
     const reader = new FileReader();
     reader.onload = (event: any) => {
@@ -72,7 +73,7 @@ export class AddImageComponent {
   }
 
 
-  createNewImageFromPayload(payload: any): ImageObject {
+  updateNewImageFromPayload(payload: any): ImageObject {
     return {
       image_id: payload.imageId,
       user_id: payload.userId,
@@ -84,22 +85,23 @@ export class AddImageComponent {
     };
   }
 
-  onUpload() {
-    console.log('Upload files:', this.myFiles);
+  onUpdate() {
+    console.log('Upload file:', this.myFiles[0]);
     console.log(this.userId);
-
+    console.log(this.myFiles[0])
+  
     this.isLoading = true;
-    from(this.myFiles).pipe(
+    from([this.myFiles[0]]).pipe(
       concatMap(file => {
-        return this.dataService.uploadImages(file, this.userId, "imageUpload").pipe(
+        return this.dataService.updateImage(file, this.userId, this.imageId, "editImage").pipe(
           tap((event: HttpResponse<any>) => {
             if (event.type === HttpEventType.Response) {
-
               if (event.body.status.remarks === 'success') {
-                const newImage = this.createNewImageFromPayload(JSON.parse(event.body.payload));
-                this.imageStoreService.addImage(newImage);
+                const newImage = this.updateNewImageFromPayload(JSON.parse(event.body.payload));
+                this.imageStoreService.updateImage(newImage);
                 this.dialogRef.close();
-                this._snackBar.open('Image uploaded successfully!', 'Close', {
+                this.dialog.closeAll();
+                this._snackBar.open('Image updated successfully!', 'Close', {
                   duration: 5000,
                 });
               }
@@ -120,7 +122,7 @@ export class AddImageComponent {
             return throwError(error);
           }),
           finalize(() => {
-            this.myFiles = []; // reset the count
+            this.myFiles = []; 
             this.isLoading = false;
           })
         );

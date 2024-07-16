@@ -12,13 +12,13 @@
             <div cdkDropList class="dropzone" (cdkDropListDropped)="onDrop($event)">
                 <div class="upload-btn-wrapper">
                     <button class="button-17 btn-upload">Upload a file</button>
-                    <input type="file" id="fileInput" (change)="onFileChanged($event)" multiple name="myfile">
+                    <input type="file" id="fileInput" (change)="onFileChanged($event)" name="myfile">
                     <small class="upload-note">* Only image files (jpg, png, webp...) are allowed.</small>
                 </div>
             </div>
         </div>
         <div *ngIf="myFiles.length > 0" class="selected-files filelist">
-            <h6>Selected Files:</h6>
+            <h6>Selected File:</h6>
             <ul class="list">
                 <li title="{{ file.name }}" *ngFor="let file of myFiles; let i = index" class="file">
                     <div class="file-name-container">
@@ -28,20 +28,15 @@
                 </li>
             </ul>
         </div>
-        <div *ngIf="myFiles.length === 0" class="selected-files filelist">
-            <h6>Selected Files:</h6>
-            <p class="text-center pt-4">No file(s) selected</p>
-        </div>
-
         <div class="file-preview" *ngIf="myFiles.length === 1">
             <img class="image-preview" [src]="filePreview" alt="File Preview" />
         </div>
 
         <div class="upload-btn-wrapper">
-            <button mat-raised-button color="primary" (click)="onUpload()" [disabled]="myFiles.length === 0"
+            <button mat-raised-button color="primary" (click)="onUpdate()" [disabled]="myFiles.length === 0"
                 class="button-17 btn">
                 <mat-icon>cloud_upload</mat-icon>
-                Upload
+                Update
             </button>
         </div>
     </div>

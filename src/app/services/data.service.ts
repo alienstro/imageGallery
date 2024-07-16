@@ -24,6 +24,21 @@ export class DataService {
     });
   }
 
+  updateImage(file: File, userId: number, imageId: number, request: string): Observable<any> {
+    const uploadData = new FormData();
+    const url = `${API_URL}${request}`;
+
+    uploadData.append('userFile', file, file.name);
+
+    uploadData.append('userId', userId.toString());
+
+    uploadData.append('imageId', imageId.toString());
+
+    return this.http.post(url, uploadData, {
+      observe: 'events'
+    });
+  }
+
   deleteImage(imageId: number, request: string): Observable<any> {
     const url = `${API_URL}${request}`;
     const data = {
