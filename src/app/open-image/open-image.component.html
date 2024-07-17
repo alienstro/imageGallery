@@ -31,7 +31,7 @@
                                 <span class="date-text">
                                     {{name.comment_date | date:'medium'}}
                                 </span>
-                                <span (click)="deleteComment(name.comment_id)" class="delete-comment-btn" *ngIf="this.ownersUserId == this.userId"><mat-icon class="delete-comment">delete</mat-icon></span>
+                                <span (click)="deleteComment(name.comment_id)" class="delete-comment-btn" *ngIf="name.user_id == this.userId"><mat-icon class="delete-comment">delete</mat-icon></span>
                             </div>
                             <!-- <h4>{{name.user_fname}} {{name.user_lname}} {{name.comment_date | date:'medium'}}</h4> -->
                             <p class="message">{{name.messages}}</p>
