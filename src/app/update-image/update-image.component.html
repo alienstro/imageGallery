@@ -39,6 +39,7 @@
     </div>
 
     <div class="container-right">
+        <h1 *ngIf="myFiles.length === 0" class="image-preview-text">Image Preview Here</h1>
         <div class="file-preview-container" *ngIf="myFiles.length === 1">
             <img class="image-preview" [src]="filePreview" alt="File Preview" />
         </div>

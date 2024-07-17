@@ -1,11 +1,19 @@
+.header {
+    width: 100%;
+    height: 5vh;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    display: flex;
+    justify-content: flex-end;
+}
+
 .row {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     gap: 2rem;
     padding: 2rem;
-    /* justify-content: space-evenly; */
-    /* changed from center to space-between */
+    justify-content: space-between;
+    overflow: hidden;
 }
 
 .imageCont {
@@ -20,53 +28,72 @@
     /* border: 2px solid black; */
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     flex-direction: column;
+    overflow: hidden;
+}
+
+.main-image-cont {
+    height: 67vh;
+    width: 60vw;
+}
+
+.main-image {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+}
+
+.commentTrash {
+    padding: 20px;
+    width: 30%;
+    /* width: 50rem; */
+    height: 74vh;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    display: flex;
 }
 
 .border {
     border: 1px solid grey;
     width: 100%;
-  }
+}
 
-  .border-special {
+.border-special {
     border-top: 1px solid grey;
     width: 100%;
     opacity: 0.5;
-  }
+}
 
 .imageCont img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    /* Use 'cover' if you want to fill the height and width without white spaces */
 }
 
-.column {
+.column-btns {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: row;
 }
 
+.updateImage {
+    padding-top: 1rem;
+}
+
 .imageEditor {
-    padding: 1rem;
+    padding: 1rem 1rem 0 1rem;
 }
 
 .trash {
-    padding: 1rem;
+    padding: 1rem 1rem 0 1rem;
 }
 
-.commentTrash {
-    padding: 20px;
-    width: 70%;
-    /* width: 50rem; */
-    height: auto;
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-}
 
-.commentTrash input {
+
+.commentTrash textarea {
     padding: 6px 12px;
     font-size: 16px;
     font-weight: 400;
@@ -78,6 +105,11 @@
     appearance: none;
     border-radius: 4px;
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    resize: none;
+    overflow-y: auto;
+    height: 6rem;
+    width: 23rem;
+
 }
 
 .commentTrash input:focus {
@@ -99,7 +131,6 @@
 
 .commentCont form {
     margin-top: auto;
-    /* add this line */
 }
 
 /* CSS */
@@ -242,15 +273,19 @@ h4 {
     font-size: 16px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-align: justify;
+    overflow-wrap: break-word;
+    word-break: break-all;
 }
 
 .comment-list {
     display: flex;
-    flex-flow:  column nowrap;
+    flex-flow: column nowrap;
     align-items: flex-start;
     gap: 24px;
-width: 100%;
-padding: 24px 0 0 0;
+    width: 100%;
+    padding: 24px 0 0 0;
+    height: 52.5vh;
+    overflow-y: auto;
 }
 
 .form {
@@ -270,4 +305,26 @@ padding: 24px 0 0 0;
 
 .delete-comment-btn {
     cursor: pointer;
+}
+
+.btn-close {
+    margin: 5px 5px 0 0;
+    border: 0;
+    padding: 0;
+    background: hsl(216, 100, 50);
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 150ms;
+
+    /* &:hover,
+    &:focus {
+      transform: rotateZ(90deg);
+      background: hsl(216, 100, 40);
+    } */
 }

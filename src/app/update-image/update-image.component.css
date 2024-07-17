@@ -299,3 +299,9 @@ h6 {
     color: gray;
     opacity: 0.5;
 }
+
+.image-preview-text {
+    font-size: 2rem;
+    color: gray;
+    opacity: 0.5;
+}

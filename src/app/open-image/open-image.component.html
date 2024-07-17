@@ -1,15 +1,23 @@
+<div class="header">
+    <button type="button" class="btn-close" (click)="onExit()">
+        <span class="icon-cross"></span>
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
 <div class="row">
     <div class="imageCont">
-        <img [src]="imagePath" alt="">
-        <div class="column">
+        <div class="main-image-cont">
+            <img class="main-image" [src]="imagePath" alt="">
+        </div>
+        <div class="column-btns">
             <div class="updateImage" *ngIf="this.ownersUserId == this.userId">
-                <button (click)="updateImage(this.imageId)" class="button-17">Update Image</button>
+                <button (click)="updateImage(this.imageId)" class="button-17 update">Update Image</button>
             </div>
-            <div class="imageEditor" *ngIf="this.ownersUserId == this.userId">
-                <button (click)="imageEditor(this.imagePath)" class="button-17">Edit Image</button>
+            <div class="imageEditor">
+                <button (click)="imageEditor(this.imagePath)" class="button-17 edit">Edit Image</button>
             </div>
             <div class="trash" *ngIf="this.ownersUserId == this.userId">
-                <button (click)="deleteImage()" class="button-17"><mat-icon>delete</mat-icon></button>
+                <button (click)="deleteImage()" class="button-17 delete"><mat-icon>delete</mat-icon></button>
             </div>
         </div>
     </div>
@@ -31,7 +39,9 @@
                                 <span class="date-text">
                                     {{name.comment_date | date:'medium'}}
                                 </span>
-                                <span (click)="deleteComment(name.comment_id)" class="delete-comment-btn" *ngIf="name.user_id == this.userId"><mat-icon class="delete-comment">delete</mat-icon></span>
+                                <span (click)="deleteComment(name.comment_id)" class="delete-comment-btn"
+                                    *ngIf="name.user_id == this.userId"><mat-icon
+                                        class="delete-comment">delete</mat-icon></span>
                             </div>
                             <!-- <h4>{{name.user_fname}} {{name.user_lname}} {{name.comment_date | date:'medium'}}</h4> -->
                             <p class="message">{{name.messages}}</p>
@@ -45,10 +55,12 @@
                     </p>
                 </ng-template>
             </div>
-            <form [formGroup]="commentForm" (ngSubmit)="onSubmit()" class="form">
-                <input type="text" formControlName="comment" placeholder="Type your comment here!">
-                <button type="submit" [disabled]="!commentForm.valid" class="comment">Comment</button>
-            </form>
+            <div class="commentBox">
+                <form [formGroup]="commentForm" (ngSubmit)="onSubmit()" class="form">
+                    <textarea formControlName="comment" placeholder="Type your comment here!"></textarea>
+                    <button type="submit" [disabled]="!commentForm.valid" class="comment"><mat-icon>send</mat-icon></button>
+                </form>
+            </div>
 
         </div>
     </div>

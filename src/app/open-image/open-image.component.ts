@@ -40,6 +40,10 @@ export class OpenImageComponent implements OnInit {
 
   }
 
+  onExit(): void {
+    this.dialogRef.close();
+  }
+
   imageEditor(image_path: string) {
     console.log(image_path)
     this.dialog.open(ImageEditorDialogComponent, { width: '70rem', height: '50rem', data: { image_path } });

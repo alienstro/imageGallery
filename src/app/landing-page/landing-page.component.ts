@@ -33,7 +33,7 @@ export class LandingPageComponent implements OnInit {
   }
 
   openImage(image: any) {
-    this.dialog.open(OpenImageComponent,{width: '70rem', height: '50rem', data: { image }})
+    this.dialog.open(OpenImageComponent,{width: '100rem', height: '50rem', data: { image }})
   }
 
   logout() {
