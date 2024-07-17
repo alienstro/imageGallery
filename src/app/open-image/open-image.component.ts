@@ -46,7 +46,7 @@ export class OpenImageComponent implements OnInit {
   }
 
   updateImage(image_id: number) {
-    this.dialog.open(UpdateImageComponent, { width: '30rem', height: '43rem', data: { image_id } });
+    this.dialog.open(UpdateImageComponent, { width: '100rem', height: '50rem', data: { image_id } });
 
     console.log(image_id)
   }

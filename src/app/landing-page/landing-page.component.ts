@@ -21,7 +21,7 @@ export class LandingPageComponent implements OnInit {
   }
 
   uploadImageDialog() {
-    this.dialog.open(AddImageComponent, {width: '30rem', height: '40rem', data:{}});
+    this.dialog.open(AddImageComponent, {width: '100rem', height: '50rem', data:{}});
   }
 
   checkImages() {

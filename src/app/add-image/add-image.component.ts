@@ -30,7 +30,7 @@ export class AddImageComponent {
   fileNames: string[] = [];
   isUploaded = false;
   isLoading = false;
-  filePreview: string | ArrayBuffer | null = null;
+  filePreviews: (string | ArrayBuffer | null)[] = [];
 
   onExit(): void {
     this.dialogRef.close();
@@ -49,28 +49,24 @@ export class AddImageComponent {
   onFileChanged(event: any) {
     const files = event.target.files;
     this.myFiles = [...this.myFiles, ...files];
-    if (this.myFiles.length === 1) {
-      this.generateFilePreview(this.myFiles[0]);
-    }
-
+    this.generateFilePreviews(this.myFiles); 
     console.log(this.myFiles.length);
   }
-  generateFilePreview(file: File) {
-    const reader = new FileReader();
-    reader.onload = (event: any) => {
-      this.filePreview = event.target.result;
-    };
-    reader.readAsDataURL(file);
+  generateFilePreviews(files: File[]) {
+    this.filePreviews = [];
+    files.forEach((file) => {
+      const reader = new FileReader();
+      reader.onloadend = (event: any) => {
+        this.filePreviews.push(event.target.result);
+      };
+      reader.readAsDataURL(file);
+    });
   }
 
   deleteFile(index: number) {
     this.myFiles.splice(index, 1);
-
-    if (this.myFiles.length === 1) {
-      this.generateFilePreview(this.myFiles[0]);
-    }
+    this.filePreviews.splice(index, 1);
   }
-
 
   createNewImageFromPayload(payload: any): ImageObject {
     return {

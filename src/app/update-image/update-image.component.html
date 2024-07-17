@@ -6,7 +6,7 @@
         </button>
     </div>
 
-    <div class="container">
+    <div class="container-left">
         <div>
             <p class="dropzone-text">Drop Files Here or Click to Upload</p>
             <div cdkDropList class="dropzone" (cdkDropListDropped)="onDrop($event)">
@@ -17,7 +17,7 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="myFiles.length > 0" class="selected-files filelist">
+        <div class="selected-files filelist">
             <h6>Selected File:</h6>
             <ul class="list">
                 <li title="{{ file.name }}" *ngFor="let file of myFiles; let i = index" class="file">
@@ -28,9 +28,6 @@
                 </li>
             </ul>
         </div>
-        <div class="file-preview" *ngIf="myFiles.length === 1">
-            <img class="image-preview" [src]="filePreview" alt="File Preview" />
-        </div>
 
         <div class="upload-btn-wrapper">
             <button mat-raised-button color="primary" (click)="onUpdate()" [disabled]="myFiles.length === 0"
@@ -38,6 +35,12 @@
                 <mat-icon>cloud_upload</mat-icon>
                 Update
             </button>
+        </div>
+    </div>
+
+    <div class="container-right">
+        <div class="file-preview-container" *ngIf="myFiles.length === 1">
+            <img class="image-preview" [src]="filePreview" alt="File Preview" />
         </div>
     </div>
 
